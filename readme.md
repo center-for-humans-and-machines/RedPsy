@@ -1,5 +1,7 @@
 # Red-teaming with Psychiatrists: A Multi-turn Conversation Dataset for Evaluating Conversational Agents
 
+[Dataset card](./dataset-card.md)
+
 ## Requirements
 
 - Python 3.13 or later
