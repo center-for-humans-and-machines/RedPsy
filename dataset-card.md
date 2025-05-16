@@ -189,6 +189,6 @@ The dataset is intended for research purposes to evaluate the safety of deployin
 
 ## Dataset Card Authors
 
-Rodrigo Bermudez Schettino, Chaewon Yun
+Rodrigo Bermudez Schettino, Chaewon Yun, Brooke Viertel, Jürgen Gallinat, Simone Kühn, Ronald Ashri, Iyad Rahwan
 
 <!-- ## Dataset Card Contact -->
