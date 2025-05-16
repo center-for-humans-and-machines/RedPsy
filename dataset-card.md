@@ -165,11 +165,22 @@ The data may contain offensive content, including hate speech, sexual content, a
 
 The dataset is intended for research purposes to evaluate the safety of deploying conversational agents in the context of mental health.
 
-<!-- ## Citation [optional] -->
+## Citation
 
 <!-- If there is a paper or blog post introducing the dataset, the APA and Bibtex information for that should go in this section. -->
 
-<!-- **BibTeX:**
+**BibTeX:**
+
+```latex
+@misc{center_for_humans_&_machines_2025,
+  author       = { Center for Humans & Machines and Rodrigo Bermudez Schettino and Chaewon Yun and Brooke Viertel and Jürgen Gallinat and Simone Kühn and Ronald Ashri and Iyad Rahwan },
+  title        = { RedPsy (Revision de317d5) },
+  year         = 2025,
+  url          = { https://huggingface.co/datasets/center-for-humans-and-machines/RedPsy },
+  doi          = { 10.57967/hf/5522 },
+  publisher    = { Hugging Face }
+}
+```
 
 [More Information Needed]
 
