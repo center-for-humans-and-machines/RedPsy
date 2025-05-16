@@ -1,0 +1,28 @@
+project:
+  type: website
+
+website:
+  back-to-top-navigation: true
+  repo-url: https://github.com/center-for-humans-and-machines/RedPsy
+  repo-actions: [edit, source, issue]
+  sidebar:
+    title: "RedPsy"
+    style: "floating"
+    search: true
+    contents:
+      - text: "Introduction"
+        href: index.qmd
+      - section: data.qmd
+        contents:
+          - data-preprocessing.qmd
+          - batch-processing.qmd
+          - regression-test.qmd
+          - model-shift.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true

@@ -1,0 +1,9 @@
+---
+title: "Data"
+---
+
+This project uses multiple data sources related to Red-Teaming.
+
+## Validation
+
+[Pydantic](https://docs.pydantic.dev/latest/) is used to validate data schemas.

@@ -1,0 +1,152 @@
+---
+title: "Batch Processing"
+---
+
+# Batch Processing
+
+The class `BaseProcessor` provides an interface to call Batch API and check its output.
+
+## Architecture
+
+`RegTestProcessor` inherits from `BaseProcessor`.
+
+```{mermaid}
+flowchart LR
+  A[BaseProcessor] --> R[RegTestProcessor]
+```
+
+`RegTestProcessor` has a class attribute called `BatchProcessor` that implements batch-related functions.
+
+```{mermaid}
+flowchart LR
+  R[RegTestProcessor] --> B(BatchProcessor)
+```
+
+## Request
+
+[Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/batch?tabs=standard-input%2Cpython-secure&pivots=ai-foundry-portal) on global batch models
+
+Example batch request object.
+
+```json
+{
+        "custom_id": f"task-{index}",
+        "method": "POST",
+        "url": "/v1/chat/completions",
+        "body": {
+            # Global batch model
+            "model": "gpt-4o-mini",
+            "temperature": 0.1,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": categorize_system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": description
+                }
+            ],
+        }
+    }
+```
+
+### Commands
+
+List all requests
+
+```bash
+jq -c '.[]' data/batch/batch_requests.jsonl
+```
+
+Display each conversation
+
+```bash
+jq -r '.body.messages' data/batch/batch_requests.jsonl
+```
+
+Display the last message of each response
+
+```bash
+jq -r '.body.messages | last' data/batch/batch_requests.jsonl
+```
+
+List the `custom_id` and last message of each response
+
+```bash
+jq -r '{
+    id: .custom_id,
+    question: .body.messages[-1].content
+} | "ID: \(.id)\nQuestion: \(.question)\n---"' data/batch/batch_requests.jsonl
+```
+
+## Results
+
+### Tracking
+
+#### Python
+
+The `process_batch` function periodically polls the latest status until job completion.
+
+> 2025-01-18 17:51:49 Waiting for batch job to finish...
+> 2025-01-18 17:56:49 Batch Id: batch_8b69ea7a-b662-454b-b0b3-6f2f098b8776, Status: in_progress
+> 2025-01-18 17:56:49 Waiting for batch job to finish...
+> 2025-01-18 18:01:49 Batch Id: batch_8b69ea7a-b662-454b-b0b3-6f2f098b8776, Status: in_progress
+> 2025-01-18 18:01:49 Waiting for batch job to finish...
+
+#### Dashboard
+
+Results can be tracked either on the [Azure](https://ai.azure.com/resource/batchjobs) or on the OpenAI portals.
+
+
+### Viewing
+
+#### Terminal
+
+Once the job has concluded, the following `jq` command will show show the IDs of the concluded jobs.
+
+::: {.callout-note}
+Replace `outputs_*.jsonl` by the exact name of your output file.
+:::
+
+```bash
+jq -r '.custom_id' data/batch/outputs_*.jsonl
+```
+
+## Match questions and answers by `custom_id`
+
+```bash
+# 1. Create questions file with proper structure
+jq -r '{
+    id: .custom_id,
+    question: .body.messages[-1].content
+}' data/batch/batch_requests.jsonl > questions.json
+
+# 2. Create answers file with proper structure
+jq -r '{
+    id: .custom_id,
+    answer: .response.body.choices[0].message.content
+}' data/batch/outputs_*.jsonl > answers.json
+
+# 3. Verify files have content
+echo "Questions:"
+cat questions.json
+echo -e "\nAnswers:"
+cat answers.json
+
+# 4. Join files and format output
+jq -n --slurpfile q questions.json --slurpfile a answers.json '
+  $q[] | . as $question |
+  $a[] | select(.id == $question.id) |
+  {
+    id: $question.id,
+    question: $question.question,
+    answer: .answer
+  }
+' | jq -r '"ID: \(.id)\nQ: \(.question)\nA: \(.answer)\n---"'
+```
+
+## Documentation
+
+- [OpenAI - Batch processing with the Batch API](https://cookbook.openai.com/examples/batch_processing)
+- [Azure - Getting started with Azure OpenAI batch deployments](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/batch?tabs=global-batch,standard-input,python-key&pivots=programming-language-python#upload-batch-file)

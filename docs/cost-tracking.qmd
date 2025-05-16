@@ -1,0 +1,27 @@
+# Cost Tracking
+
+There are several ways to track costs in this project, mainly with Langfuse and LiteLLM.
+
+We use Langfuse to track costs.
+
+## Requirements
+
+1. Self-hosted Langfuse
+1. A project on Langfuse
+1. Project-specific private and public keys from Langfuse in `.env`
+
+## Usage
+
+With an `.env` based on `env.example` containing `LANGFUSE_PUBLIC_KEY` and `LANGFUSE_PRIVATE_KEY`, the following code will log cost usage to Langfuse.
+
+This sample code uses LangChain behind-the-scenes with a callback to Langfuse.
+
+```python
+from redpsy.monitoring.processors import InSilicoConversationProcessor
+
+# Create processor instance
+processor = InSilicoConversationProcessor(max_turns=2)
+
+# For Jupyter notebooks, use this pattern instead of asyncio.run()
+await processor.simulate_conversation("I feel depressed")
+```

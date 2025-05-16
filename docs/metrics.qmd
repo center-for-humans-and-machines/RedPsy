@@ -1,0 +1,14 @@
+# Metrics
+
+Analyze synthetic dataset with calculated metrics.
+
+## Self-BLEU
+
+Calculate Self-BLEU using code from [DigitalOcean](https://www.digitalocean.com/community/tutorials/automated-metrics-for-evaluating-generated-text#self-bleu). Even though Self-BLEU has its downsides,
+it is used in
+
+```python
+from redpsy.metrics import self_bleu
+
+self_bleu.calculate_self_bleu(sentences)
+```

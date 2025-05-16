@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "RedPsy"
+version = "0.1.0"
+description = ""
+authors = [
+  "Rodrigo Bermudez Schettino <rodrigobdz@users.noreply.github.com>",
+  "Chaewon Yun <chaee@users.noreply.github.com>",
+]
+readme = "readme.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+jupyter = "^1.1.1"
+notebook = "^7.2.2"
+ipykernel = "^6.29.5"
+matplotlib = "^3.9.3"
+polars = "^1.16.0"
+seaborn = "^0.13.2"
+pyarrow = "^18.1.0"
+python-dotenv = "^1.0.1"
+requests = "^2.32.3"
+pytest = "^8.3.5"
+openai = "^1.72.0"
+scikit-learn = "^1.6.1"
+langchain = { extras = ["openai"], version = "^0.3.24" }
+nltk = "^3.9.1"
+langfuse = "^2.60.4"
+plotly = "^6.0.1"
+langchain-together = "^0.3.0"
+xlsxwriter = "^3.2.3"
+umap = "^0.1.1"
+umap-learn = "^0.5.7"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.2"
+pydantic = "^2.11.3"
+pyink = "^24.10.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

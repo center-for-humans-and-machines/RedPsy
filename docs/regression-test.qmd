@@ -1,0 +1,53 @@
+# Regression Testing
+
+To avoid model drift and ensure that the outputs of the LLM are safe, we have a regression testing pipeline in place.
+
+The regression pipeline is implemented with the `RegTestProcessor` class, see [Batch Processing](./batch-processing.qmd).
+
+To test the `RegTestProcessor`, it is possible to either use the `ChatCompletions` API (`process_samples`) or the Batch API (`process_batch`).
+
+## Run Test
+
+### Locally
+
+The regression test is part of the test suite. To run the suite using `pytest`, execute the following command:
+
+```shell
+./script/test -r
+```
+
+### GitHub Actions
+
+1. Navigate to [_Regression test_ workflow in GitHub Actions](https://github.com/center-for-humans-and-machines/RedPsy/actions/workflows/regression-test.yml)
+1. Click on the _Run workflow_ button
+1. Select either OpenAI or Azure as batch provider
+1. Click on the _Run workflow_ button
+
+[Further reading](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#providing-inputs)
+
+## Test snippet
+
+```python
+from redpsy.monitoring import RegTestProcessor
+
+TEST: bool = False
+
+processor = RegTestProcessor()
+
+if TEST:
+    results = processor.process_samples(5)
+
+    my_input: str = processor.input_column_name
+    my_output: str = processor.output_column_name
+
+    # Print results
+    for result in results:
+        print("\n" + "=" * 80)
+        print(f"{my_input}: {result[my_input]}")
+        print(f"{my_output}: {result[my_output]}")
+        print("=" * 80)
+
+else:
+    results = processor.process_batch()
+    processor.validate_results(results)
+```

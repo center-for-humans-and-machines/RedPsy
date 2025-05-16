@@ -1,0 +1,32 @@
+# Safety Evaluation
+
+## Simulate Conversations
+
+### Usage
+
+```python
+# %autoawait
+from redpsy.monitoring.processors import InSilicoConversationProcessor
+
+# Create processor instance
+processor = InSilicoConversationProcessor()
+
+# For Jupyter notebooks, use this pattern instead of asyncio.run()
+await processor.simulate_conversation("I feel depressed")
+```
+
+## Rating Conversations
+
+We implemented an API call to rate a batch of conversations according to a custom scale.
+We can rate either actual conversations or simulated ones.
+
+### Usage
+
+```python
+from redpsy.monitoring import RateConversationsProcessor
+
+processor = RateConversationsProcessor(input_file="")
+
+results = processor.process_batch()
+processor.validate_results(results)
+```

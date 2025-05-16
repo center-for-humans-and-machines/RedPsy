@@ -1,0 +1,5 @@
+---
+title: "RedPsy Developer Documentation"
+---
+
+The goal is to showcase how to interact with the codebase. The following notebook will show an example.
