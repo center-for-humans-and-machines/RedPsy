@@ -182,12 +182,6 @@ The dataset is intended for research purposes to evaluate the safety of deployin
 }
 ```
 
-[More Information Needed]
-
-**APA:**
-
-[More Information Needed] -->
-
 <!-- ## Glossary -->
 
 <!-- If relevant, include terms and calculations in this section that can help readers understand the dataset or dataset card. -->
