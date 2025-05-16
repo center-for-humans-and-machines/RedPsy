@@ -174,10 +174,10 @@ The dataset is intended for research purposes to evaluate the safety of deployin
 ```latex
 @misc{center_for_humans_&_machines_2025,
 	author       = { Center for Humans & Machines and Chaewon Yun and Rodrigo Bermudez Schettino and Brooke Viertel and Jürgen Gallinat and Simone Kühn and Ronald Ashri and Iyad Rahwan },
-	title        = { RedPsy (Revision d71fbbc) },
+	title        = { RedPsy (Revision 5905e9a) },
 	year         = 2025,
 	url          = { https://huggingface.co/datasets/center-for-humans-and-machines/RedPsy },
-	doi          = { 10.57967/hf/5527 },
+	doi          = { 10.57967/hf/5528 },
 	publisher    = { Hugging Face }
 }
 ```
